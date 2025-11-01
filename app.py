@@ -202,19 +202,19 @@ with col1:
     st.subheader("1. Interactive Landcover Visualization")
     
     # Initialize the map centered on the AOI
-    # We explicitly use 'CartoDB positron' tiles, which are stable and free,
-    # to avoid 401 unauthorized errors common with ESRI or Stamen tiles.
+    # CRITICAL FIX: Set tiles=None to prevent Folium from loading any default, 
+    # authentication-required base layers that cause the 401 error. 
+    # The map will rely solely on the layers we add manually.
     m = folium.Map(
         location=[lat, lon],
         zoom_start=12,
-        tiles='CartoDB Positron',  # <--- CRITICAL FIX: Explicitly set a reliable, free tile source
+        tiles=None, # <--- The aggressive fix for 401 errors
         control_scale=True,
         width='100%',
         height='600px'
     )
 
-    # 1. Add the selected Basemap
-    # Note: If the user selects OpenStreetMap, this re-adds it, which is fine for Folium
+    # 1. Add the selected Basemap (This is the layer that will actually show up)
     selected_basemap.add_to(m) 
 
     # 2. Add the Classified Map Layer (Mock TileLayer)
@@ -242,7 +242,6 @@ with col1:
     folium.LayerControl().add_to(m)
 
     # Render the map using st_folium (interactive drawing enabled)
-    # Note: st_folium returns the drawing results, which we capture in 'output'
     output = st_folium(
         m,
         height=600,
@@ -319,5 +318,3 @@ with col2:
         
         st.caption("Interpretation provided by Gemini-2.5-Flash (LLM).")
 eof
-
-Please commit and push this version of `app.py` and the previously provided `floristics_map_data.py` to your repository. This should resolve the map authentication error on Streamlit Cloud.
