@@ -8,3 +8,4 @@ geemap
 streamlit-folium
 langchain-google-genai
 langchain-core
+geojson
