@@ -315,4 +315,3 @@ with col2:
         """, unsafe_allow_html=True)
         
         st.caption("Interpretation provided by Gemini-2.5-Flash (LLM).")
-eof
