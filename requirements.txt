@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+scikit-learn
+matplotlib
+folium
+geemap
+streamlit-folium
+langchain-google-genai
+langchain-core
