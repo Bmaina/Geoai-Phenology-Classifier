@@ -2,8 +2,7 @@ import folium
 
 # --- Map Configuration and Constants ---
 
-# Replaced the original Stamen URL (which causes errors as it is deprecated) 
-# with Stadia Maps Alidade Smooth Dark, a stable, free tile provider.
+# Replaced the original problematic URL with Stadia Maps Alidade Smooth Dark, a stable, free tile provider.
 CLASSIFIED_MAP_TILE_URL = "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
 
 # Initial central coordinates (approximate center of the Maasai Mara ecosystem)
@@ -57,8 +56,3 @@ DEFAULT_AOI_GEOJSON = {
         }
     ]
 }
-eof
-
-## 2. Main Application: `app.py` (Map Initialization Fix)
-
-This file explicitly sets the base map tiles to `'CartoDB Positron'` in the `folium.Map` call to avoid the 401 error.

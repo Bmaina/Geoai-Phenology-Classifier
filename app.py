@@ -71,10 +71,9 @@ def get_ai_interpretation(report_data):
                 return text
             
         except requests.exceptions.RequestException as e:
-            # st.error(f"API Error on attempt {attempt + 1}: {e}")
-            time.sleep(2 ** attempt) # Exponential backoff
-        except Exception as e:
-            # st.error(f"Failed to process API response: {e}")
+            # time.sleep(2 ** attempt) # Exponential backoff
+            pass 
+        except Exception:
             break
             
     return AI_INTERPRETATION # Fallback to mock data on all failures
@@ -208,7 +207,7 @@ with col1:
     m = folium.Map(
         location=[lat, lon],
         zoom_start=12,
-        tiles=None, # <--- The aggressive fix for 401 errors
+        tiles=None, 
         control_scale=True,
         width='100%',
         height='600px'
@@ -241,12 +240,14 @@ with col1:
     # 4. Add Layer Control for toggling maps
     folium.LayerControl().add_to(m)
 
-    # Render the map using st_folium (interactive drawing enabled)
+    # Render the map using st_folium
+    # FIX: Removed feature_group_to_add='draw' because it must be a Folium object, not a string, 
+    # to avoid AttributeError. The map drawing functionality is often automatically 
+    # handled by st_folium's returned_objects flag.
     output = st_folium(
         m,
         height=600,
         width="100%",
-        feature_group_to_add='draw',
         returned_objects=["last_active_drawing"],
         key="phenology_map",
     )
@@ -317,4 +318,3 @@ with col2:
         """, unsafe_allow_html=True)
         
         st.caption("Interpretation provided by Gemini-2.5-Flash (LLM).")
-eof
