@@ -186,7 +186,7 @@ with st.sidebar:
     selected_basemap_name = st.selectbox(
         "Select Base Map Style:",
         list(BASEMAP_OPTIONS.keys()),
-        index=1
+        index=0 # FIX: Changed default index from 1 (Positron) to 0 (OpenStreetMap) for better reliability
     )
     selected_basemap = BASEMAP_OPTIONS[selected_basemap_name]
 
@@ -241,9 +241,6 @@ with col1:
     folium.LayerControl().add_to(m)
 
     # Render the map using st_folium
-    # FIX: Removed feature_group_to_add='draw' because it must be a Folium object, not a string, 
-    # to avoid AttributeError. The map drawing functionality is often automatically 
-    # handled by st_folium's returned_objects flag.
     output = st_folium(
         m,
         height=600,
@@ -318,3 +315,4 @@ with col2:
         """, unsafe_allow_html=True)
         
         st.caption("Interpretation provided by Gemini-2.5-Flash (LLM).")
+eof
