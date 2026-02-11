@@ -134,7 +134,7 @@ The app will automatically open in your web browser.
 
 This application is deployed and hosted for free on Streamlit Cloud.
 
-🔗 [Access the Live Demo Here (If deployed)] ---
+🔗 [Access the Live Demo Here (https://geoai-phenology-classifier.streamlit.app/] ---
 
 Files in this Repository
 
